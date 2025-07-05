@@ -5,16 +5,6 @@ import { TypeAnimation } from "react-type-animation"
 import dynamic from "next/dynamic"
 import WaitlistForm from "@/components/waitlist-form"
 
-// Dynamically import the ModelViewer component to avoid SSR issues
-const ModelViewerScene = dynamic(() => import("@/components/model-viewer-scene"), {
-  ssr: false,
-  loading: () => (
-    <div className="h-[400px] w-full max-w-[600px] flex items-center justify-center">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
-    </div>
-  ),
-})
-
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false)
 
@@ -23,23 +13,52 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-black">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden min-h-screen">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-no-repeat"
+        style={{
+          backgroundImage: "url('/hero-background.png')",
+          backgroundPosition: 'center top 20%',
+        }}
+      />
+      
+      {/* Rest background pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-20 bg-cover bg-no-repeat"
+        style={{
+          backgroundImage: "url('/res-background.jpg')",
+          backgroundPosition: 'center',
+          mixBlendMode: 'overlay'
+        }}
+      />
+      
+      {/* Gradient Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80" />
+      
+      {/* Bottom Blur Transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/90 to-transparent backdrop-blur-sm" />
+      
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center text-center">
           <div
-            className={`inline-block px-4 py-1 mb-6 bg-[#1a1a1a] border border-gray-800 rounded-full transition-all duration-1000 ${
+            className={`inline-block px-4 py-1 mb-6 bg-black/50 backdrop-blur-sm border border-white/20 rounded-full transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <span className="text-sm font-medium text-blue-400/80">NEXT-GEN GAME DEVELOPMENT</span>
+            <span className="text-sm font-medium text-blue-400/90">NEXT-GEN GAME DEVELOPMENT</span>
           </div>
 
           <div className="min-h-[180px] flex items-center justify-center mb-6">
             <h1
-              className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight max-w-4xl transition-all duration-1000 delay-300 ${
+              className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight max-w-4xl transition-all duration-1000 delay-300 text-white drop-shadow-2xl ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
-              style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" }}
+              style={{ 
+                fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif",
+                textShadow: "0 4px 8px rgba(0, 0, 0, 0.8)"
+              }}
             >
               <span className="block h-[1.2em] overflow-hidden">
                 <TypeAnimation
@@ -59,36 +78,31 @@ export default function HeroSection() {
                 />
               </span>
               {" "}
-              <span className="text-gray-400">for</span> <span>game development</span>
+              <span className="text-gray-300">for</span> <span>game development</span>
             </h1>
           </div>
 
           <p
-            className={`text-xl text-gray-300 mb-10 max-w-2xl transition-all duration-1000 delay-500 ${
+            className={`text-xl text-gray-200 mb-10 max-w-2xl transition-all duration-1000 delay-500 drop-shadow-lg ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
-            style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" }}
+            style={{ 
+              fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+              textShadow: "0 2px 4px rgba(0, 0, 0, 0.8)"
+            }}
           >
             Accelerate your game development with VectorAI.
           </p>
 
-          <div className="relative h-[400px] w-full max-w-[600px] mb-12">
-            <div 
-              className={`absolute top-0 left-0 right-0 bottom-0 w-full h-full transition-all duration-1000 delay-700 ${
-                isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
-            >
-              <div className="absolute inset-0 bg-blue-500/5 rounded-2xl blur-3xl"></div>
-              <Suspense
-                fallback={
-                  <div className="h-[400px] w-full flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
-                  </div>
-                }
-              >
-                <ModelViewerScene />
-              </Suspense>
-            </div>
+          <div className="relative h-[400px] w-full max-w-[600px] mb-12 flex items-center justify-center mx-auto">
+            <video
+              src="/demovid.gif"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-contain rounded-2xl shadow-lg border border-gray-700"
+            />
           </div>
 
           <div
@@ -101,5 +115,5 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

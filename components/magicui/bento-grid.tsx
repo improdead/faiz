@@ -20,7 +20,7 @@ interface BentoCardProps {
 
 const BentoGrid = ({ children, className }: BentoGridProps) => {
   return (
-    <div className={cn("grid w-full auto-rows-[22rem] grid-cols-3 gap-4", className)}>
+    <div className={cn("grid w-full auto-rows-[18rem] grid-cols-3 gap-4", className)}>
       {children}
     </div>
   )

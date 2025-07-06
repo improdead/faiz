@@ -18,11 +18,24 @@ export default function TestimonialsSection() {
   }, [inView])
 
   return (
-    <section ref={ref} className="py-20 md:py-32 bg-black">
-      <div className="container mx-auto px-4 md:px-6">
+    <section ref={ref} className="relative py-20 md:py-32 bg-black overflow-hidden">
+      {/* Background Pattern */}
+      <div 
+        className="absolute inset-0 opacity-5 bg-cover bg-no-repeat"
+        style={{
+          backgroundImage: "url('/res-background.jpg')",
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
+        }}
+      />
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
+      
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <h2
-            className={`text-4xl md:text-6xl font-bold mb-6 transition-all duration-700 ${
+            className={`text-4xl md:text-6xl font-bold mb-6 text-white transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >

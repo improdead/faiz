@@ -22,7 +22,7 @@ const files = [
   {
     name: "logo.svg",
     body: "Scalable Vector Graphics is an Extensible Markup Language-based vector image format for two-dimensional graphics with support for interactivity and animation.",
-  },
+  },    
   {
     name: "keys.gpg",
     body: "GPG keys are used to encrypt and decrypt email, files, directories, and whole disk partitions and to authenticate messages.",
@@ -33,7 +33,7 @@ const files = [
   },
 ];
 
-const features = [
+const features = [ 
   {
     Icon: FileTextIcon,
     name: "Save your files",

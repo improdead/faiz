@@ -18,7 +18,7 @@ export default function HeroSection() {
       <div 
         className="absolute inset-0 bg-cover bg-no-repeat"
         style={{
-          backgroundImage: "url('/hero-background.png')",
+          backgroundImage: "url(              #'/hero-background.png')",
           backgroundPosition: 'center top 20%',
         }}
       />
@@ -33,7 +33,7 @@ export default function HeroSection() {
         }}
       />
       
-      {/* Gradient Overlay for better text readability */}
+      {/* Gradient Overlay for better text readability */}  
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80" />
       
       {/* Bottom Blur Transition */}
